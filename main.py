@@ -9,8 +9,12 @@ isReleased = False
 while True:
 
     searchString = """<a href='#' data-width='1024' data-height='579' data-analytics="btn-manual:3080-staticprice" data-title="Notify me" data-href='https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/notify-me-form/' target="overlay" id='3080-staticprice' class='  link-btn btn-manual lb_iframe brand-green regular-btn ' onclick='NVIDIAGDC.button.click(this, $(this).data(&quot;href&quot;),true, function() { ;return NVIDIAGDC.button.callbacks(this); }); return false;'><div class='btn'><span class="far fa fa-envelope fa-fw"></span> NOTIFY ME</div></a>"""
-
-    requestResult = requests.get("https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/").text
+    try:
+        requestResult = requests.get("https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/").text
+    except Exception:
+        print("Network error")
+        time.sleep(1)
+        continue
 
     searchResult = requestResult.find(searchString)
     if searchString == -1 :
